@@ -67,5 +67,5 @@ class Lecturer:
 # EXAMPLE SCENARIO
 lecturer = Lecturer()
 # lecturer.register_lecturer()
-lecturer.fectch_lecturers()
+lecturer.verify_lecturer()
 
