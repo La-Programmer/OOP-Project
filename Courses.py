@@ -71,4 +71,4 @@ class Courses:
         results = self.cursor.fetchall()
         print(results)
 courses = Courses()
-courses.fetch_courses()
+courses.insert_many_courses()
