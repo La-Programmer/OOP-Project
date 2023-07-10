@@ -27,7 +27,7 @@ class Registration:
         result = self.cursor.fetchall()
         self.level = result[0][0]
         self.yoa = result[0][1]
-        print(self.level, self.yoa)
+        # print(self.level, self.yoa)
         self.cursor.execute(
             f"""
             SELECT Semester, Session FROM SEMESTER WHERE SemesterId = '{self.semester}'
@@ -44,6 +44,26 @@ class Registration:
         student_current_level = ((current_session_integer - self.yoa) * 100) + self.level
         print(student_current_level)
 
+        if (self.yoa < 2019):
+            curriculum = "o_Courses"
+        else:
+            curriculum = "Courses"
+
+        print (self.yoa < 2019)
+
+        if (self.current_semester == 1):
+            semester_in_text = "First"
+        else:
+            semester_in_text = "Second"
+
+        self.cursor.execute(
+            f"""
+            SELECT * FROM {curriculum} 
+            WHERE CourseLevel = {student_current_level} AND CourseSemester = '{semester_in_text}'
+            """
+        )
+        main_results = self.cursor.fetchall()
+        print(main_results)
 
 # Instance testing
 regista = Registration()

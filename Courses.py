@@ -16,6 +16,22 @@ class Courses:
             )
             """
         )
+
+        self.cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS o_Courses (
+            CourseCode TEXT PRIMARY KEY,
+            CourseName TEXT,
+            CourseLevel INTEGER,
+            CourseSemester TEXT,
+            CourseCurriculum TEXT,
+            Outstanding TEXT DEFAULT NULL
+            )
+            """
+        )
+
+        self.connection.commit()
+
     def insert_course(self):
         self.code = input("Insert course code: ")
         self.name = input("Insert course name: ")
@@ -33,7 +49,6 @@ class Courses:
         print(self.name + " has been successfully added to the course list")
 
     def insert_many_courses(self):
-        courses_data = []
         amount = int(input("How many courses would you like to insert into the databse: "))
         for i in range(amount):
             self.code = input("Insert course code: ")
@@ -41,16 +56,17 @@ class Courses:
             self.level = input("Insert course level: ")
             self.semester = input("Insert course semester: ")
             self.curriculum = input("Insert course curriculum: ")
-            course = (self.code, self.name, self.level, self.semester, self.curriculum)
-            courses_data.append(course)
-        query = """
-        INSERT INTO Courses (CourseCode, CourseName, CourseLevel, CourseSemester, CourseCurriculum, Outstanding)
-        VALUES (?, ?, ?, ?, ?, NULL)
-        """
-
-        self.cursor.executemany(query, courses_data)
-        self.connection.commit()
-        print("Courses have successfully been added to the database")
+            if (self.curriculum == "Old"):
+                curr = "o_Courses"
+            else:
+                curr = "Courses"
+            query = f"""
+            INSERT INTO {curr} (CourseCode, CourseName, CourseLevel, CourseSemester, CourseCurriculum, Outstanding)
+            VALUES ('{self.code}', '{self.name}', '{self.level}', '{self.semester}', '{self.curriculum}', NULL)
+            """
+            self.cursor.execute(query)
+            self.connection.commit()
+            print(self.name + " has successfully been added to the database")
 
     def delete_course(self):
         code = input("Insert the course code of the course you would like to delete: ")
