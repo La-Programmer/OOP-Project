@@ -16,12 +16,12 @@ class Lecturer:
             """
         )
     
-    def register_lecturer(self):
-        self.id = input("Enter lecturer ID: ")
-        self.name = input("Enter lecturer Name: ")
-        self.yoe = input("Enter year of employment: ")
-        self.uname = input("Enter desired username: ")
-        self.password = input("Enter desired password: ")
+    def register_lecturer(self, id, name, yoe, uname, password):
+        self.id = id
+        self.name = name
+        self.yoe = yoe
+        self.uname = uname
+        self.password = password
         self.cursor.execute(
             f"""
             INSERT INTO Lecturers
@@ -32,9 +32,7 @@ class Lecturer:
         self.connection.commit()
         print(self.name + " has been successfully registered")
     
-    def verify_lecturer(self):
-        uname = input("Enter Username: ")
-        pwd = input("Enter Password: ")
+    def verify_lecturer(self, uname, pwd):
         self.cursor.execute(
             f"""
             SELECT NAME FROM Lecturers WHERE Username = '{uname}' AND Password = '{pwd}'

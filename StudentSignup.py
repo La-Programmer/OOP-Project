@@ -18,14 +18,14 @@ class Student:
             """
         )
 
-    def register_student(self):
-        self.matricNo = input("Enter student matriculation number: ")
-        self.name = input("Enter student name: ")
-        self.level = input("Enter student level: ")
-        self.yoa = input("Enter student year of admission: ")
-        self.dept = "Computer Engineering"
-        self.uname = input("Enter desired username: ")
-        self.password = input("Enter desired password: ")
+    def register_student(self, matricNo, name, level, yoa, dept, uname, password):
+        self.matricNo = matricNo
+        self.name = name
+        self.level = level
+        self.yoa = yoa
+        self.dept = dept
+        self.uname = uname
+        self.password = password
         self.cursor.execute(
             f"""
             INSERT INTO Students
@@ -55,9 +55,7 @@ class Student:
         self.connection.commit()
         print("Student with matriculation number "+ matricNo +" has successfully been deleted from the system")
 
-    def student_verify(self):
-        uname = input("Enter username: ")
-        pwd = input("Enter password: ")
+    def student_verify(self, uname, pwd):
         self.cursor.execute(
             f"""
             SELECT Name FROM Students WHERE Uname = '{uname}' AND Password = '{pwd}'

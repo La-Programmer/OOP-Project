@@ -65,6 +65,8 @@ class Registration:
         main_results = self.cursor.fetchall()
         print(main_results)
 
+    # def course_registration(self):
+
 # Instance testing
 regista = Registration()
 regista.fetch_registration_courses()
