@@ -64,6 +64,6 @@ class Lecturer:
 
 # EXAMPLE SCENARIO
 lecturer = Lecturer()
-# lecturer.register_lecturer()
-lecturer.verify_lecturer()
+# lecturer.register_lecturer(4, 'Albert Einstein', 1980, 'albert.einstein', 'alberteinstein')
+lecturer.verify_lecturer('albert.einstein', 'alberteinste')
 

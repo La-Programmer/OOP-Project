@@ -47,7 +47,7 @@ class Registration:
         if (self.yoa < 2019):
             curriculum = "o_Courses"
         else:
-            curriculum = "Courses"
+            curriculum = "n_Courses"
 
         # print (self.yoa < 2019)
 
@@ -82,5 +82,5 @@ class Registration:
 
 # Instance testing
 regista = Registration()
-regista.fetch_registration_courses()
+regista.fetch_registration_courses('EU210303-2870', 6)
 regista.semester_registration()
