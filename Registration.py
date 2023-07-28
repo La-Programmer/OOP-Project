@@ -1,7 +1,8 @@
 import sqlite3
 
 class Registration:
-    def __init__(self ):
+    def __init__(self, semester):
+        self.semester = semester
         self.connection = sqlite3.connect("main.db")#Connect to the main database
         self.cursor = self.connection.cursor()
         self.cursor.execute(
@@ -16,9 +17,8 @@ class Registration:
             )
             """
         )
-    def fetch_registration_courses(self, matricNo, semester):
+    def fetch_registration_courses(self, matricNo):
         self.matricNo = matricNo
-        self.semester = semester
         self.cursor.execute(
             f"""
             SELECT Level, YOA FROM STUDENTS WHERE MatricNo = '{self.matricNo}'
@@ -79,8 +79,29 @@ class Registration:
         )
         self.connection.commit()
         print("You have successfully registered for this semester")
+    
+    def multiple_semester_registration(self):
+        number = int(input("How many students would you like to register: "))
+        students = []
+        registration_courses = []
+        for i in range(len(self.semester_courses)):
+            course_input = input("Enter course code to add course: ")
+            registration_courses.append(course_input)
+        csv_string = ','.join(map(str, registration_courses))
+        for num in range(number):
+            student = input("Enter student matric-no: ")
+            students.append(student)
+        for j in range(len(students)):
+            self.cursor.execute(
+                f"""
+                INSERT INTO Registration (MatricNo, SemesterId, CourseCodes)
+                VALUES('{students[j]}', '{self.semester}', '{csv_string}')
+                """
+            )
+            self.connection.commit()
+            print("You have successfully registered the students for this semester")
 
 # Instance testing
-regista = Registration()
-regista.fetch_registration_courses('EU210303-2870', 6)
-regista.semester_registration()
+regista = Registration(6)
+regista.fetch_registration_courses('EU210303-2874')
+regista.multiple_semester_registration()

@@ -78,4 +78,4 @@ class Student:
     
 # EXAMPLE
 student = Student()
-student.student_verify()
+student.register_student('EU210303-2879', 'Kaseem Bello', 100, 2020, 'Computer Engineering', 'kaseem.bello', '1234567890')

@@ -2,5 +2,5 @@
 
 -- Use the ▷ button in the top right corner to run the entire file;
 
-DROP TABLE Results_100L;
+DROP TABLE nResults_100L2;
 

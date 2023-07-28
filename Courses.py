@@ -50,7 +50,7 @@ class Courses:
         self.cursor.execute(
             f"""
             INSERT INTO {curr}
-            VALUES ('{self.code}', '{self.name}', {self.level}, '{self.semester}', '{self.curriculum}', 1, {self.units})
+            VALUES ('{self.code}', '{self.name}', {self.level}, '{self.semester}', '{self.curriculum}', NULL, {self.units})
             """
         )
 
@@ -65,13 +65,14 @@ class Courses:
             self.level = input("Insert course level: ")
             self.semester = input("Insert course semester: ")
             self.curriculum = input("Insert course curriculum: ")
+            self.units = input("Input course units: ")
 
             if (self.curriculum == "Old"):
                 curr = "o_Courses"
             else:
                 curr = "n_Courses"
             query = f"""
-            INSERT INTO {curr} (CourseCode, CourseName, CourseLevel, CourseSemester, CourseCurriculum, Outstanding)
+            INSERT INTO {curr} (CourseCode, CourseName, CourseLevel, CourseSemester, CourseCurriculum, Outstanding, CourseUnits)
             VALUES ('{self.code}', '{self.name}', '{self.level}', '{self.semester}', '{self.curriculum}', NULL, {self.units})
             """
             self.cursor.execute(query)
@@ -112,4 +113,4 @@ class Courses:
             self.connection.commit()
             print("Course units have been successfully changed")
 courses = Courses()
-courses.alter_course_units()
+courses.insert_course()
